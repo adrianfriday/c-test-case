@@ -1,0 +1,27 @@
+name: C build and tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Compile
+        run: |
+          mkdir -p build
+          gcc grade.c test.c -o build/grade-tests
+
+      - name: Run tests
+        run: ./build/grade-tests
