@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-extern const char* outcome_from_grade(int);
+extern const char *outcome_from_grade(int);
 
-int failures = 0;
-
-void test_case(int grade, const char* expected)
+int test_case(int grade, const char* expected)
 {
     const char* actual = outcome_from_grade(grade);
 
@@ -18,20 +16,27 @@ void test_case(int grade, const char* expected)
             actual
         );
 
-        failures++;
+
+        return 1; // I've failed, return 1
     }
+    
+    // must've passed the test
+
+    return 0;
 }
 
 int main()
 {
-    test_case(1, "fail");
-    test_case(4, "fail");
+    int failures = 0;
 
-    test_case(5, "pass");
-    test_case(7, "pass");
+    failures += test_case(1, "fail");
+    failures += test_case(4, "fail");
 
-    test_case(8, "distinction");
-    test_case(10, "distinction");
+    failures += test_case(5, "pass");
+    failures += test_case(7, "pass");
+
+    failures += test_case(8, "distinction");
+    failures += test_case(10, "distinction");
 
     if (failures == 0)
     {
