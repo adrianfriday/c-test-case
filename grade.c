@@ -2,7 +2,7 @@ const char *outcome_from_grade(int grade)
 {
    char *result = "invalid";
 
-   if (grade >= 1 && grade <= 5)
+   if (grade >= 1 && grade <= 4)
       result = "fail";
    else
       if (grade >= 5 && grade <= 7)
